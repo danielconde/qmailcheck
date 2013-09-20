@@ -33,17 +33,19 @@ Check every 5 minutes servers' mail queue and flush notify flag every 45 mins. I
 */45 * * * * root /root/monitor/script_flag.sh
 
 
-== ADDING another IP ==
 
-1 - Enter the key "IP:0" in /root/monitor/servers.txt at the very end, one per line. ie -> "127.0.0.1:0"
+==ADDING another IP ==
 
-2 - Insert the RSA key on the target server to which the monitor connects directly via ssh. To do this copy the contents of id_rsa.pub where monitormail.sh is installed and add it at the end of the file /root/.ssh/authorized_keys on the remote mailserver we want to monitor. Create .ssh directory and authorized_keys file if does not exist. Google it about creating the id_rsa.pub file on your server.
+
+1) Enter the key "IP:0" in /root/monitor/servers.txt at the very end, one per line. ie -> "127.0.0.1:0"
+
+2) Insert the RSA key on the target server to which the monitor connects directly via ssh. To do this copy the contents of id_rsa.pub where monitormail.sh is installed and add it at the end of the file /root/.ssh/authorized_keys on the remote mailserver we want to monitor. Create .ssh directory and authorized_keys file if does not exist. Google it about creating the id_rsa.pub file on your server.
 
 CAUTION! There can be no spaces or gaps by copying and pasting the content, otherwise it will not allow direct ssh access to the server.
 
-2 - If you are using Plesk Control Panel, check out the version. Plesk 8.2 and below must be added as exception in the next step because the binary mailqueuemng does not work.
+3) If you are using Plesk Control Panel, check out the version. Plesk 8.2 and below must be added as exception in the next step because the binary mailqueuemng does not work.
 
-2.1 -> If you have plesk 8.0 or 8.2, you must uncomment LINE 35 and add the IP. You must also install qmHandle in the monitor server.
+3.1) If you have plesk 8.0 or 8.2, you must uncomment LINE 35 and add the IP. You must also install qmHandle in the monitor server.
 
 Uncomment LINE 35 -> # if [ "$line" = "YOUR_IP" ]  , if you need to add more than one IP, add OR operator and the bash code in brackets:
  Here's an example:
@@ -58,6 +60,6 @@ Easy, right!?
 
 CAUTION! there must be a space after the end bracket.
 
-Finally connect via the ssh directly with the target server. ie -> ssh root@NEWIP and accept the fingerprint "yes".
+4) Finally connect via the ssh directly with the target server. ie -> ssh root@NEWIP and accept the fingerprint "yes".
 
 We are done!
