@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Qmailcheck : Qmail &amp; Postfix Queue Monitor Script" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Qmailcheck</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/danielconde/qmailcheck">View on GitHub</a>
+
+          <h1 id="project_title">Qmailcheck</h1>
+          <h2 id="project_tagline">Qmail &amp; Postfix Queue Monitor Script</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/danielconde/qmailcheck/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/danielconde/qmailcheck/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>
+<a name="qmailcheck-by-daniel-conde-rodriguez-daconde2-" class="anchor" href="#qmailcheck-by-daniel-conde-rodriguez-daconde2-"><span class="octicon octicon-link"></span></a>qmailcheck by Daniel Conde Rodriguez @daconde2 </h1>
+
+<p>Qmail and Postfix Mail Queue Monitor Script</p>
+
+<p>This scripts will help you fighting against the spam. It will notify you when a limit of mails are queued in the mail queue of the server. Main Benefits are:
+· Detect &amp; Reduce the amount of outbound spam before being blacklisted.
+· Maintain IP good reputation in Internet blocking lists and networks.
+· Costs savings: Decrease the costs associated with the resolution of blocked IPs and staff workload assignment.
+· Improve Customers Engadgement for dissatisfied customer management for being blocked by other blacklists or ISP providers</p>
+
+<p>== INSTALLATION ==</p>
+
+<p>1) Copy this three files anywhere in you server in the same directory. ie. /root/monitor</p>
+
+<ul>
+<li>monitormail.sh: Checks the mail queue and sends an email if the queue limit "qlimit_remote" variable is exceeded. </li>
+<li>script_flag.sh: Checks which IP has been flagged (0,1) to avoid sending notifications every time monitormail.sh checks the server mail queue. Acts as notification delay.</li>
+<li>servers.txt: list of servers to be monitorized. 0 means not flagged. 1 means flagged = email notification already sent to email address specified by "notifyemail" in monitor.sh</li>
+</ul><p>2) chmod 755 monitormail.sh</p>
+
+<p>3) Configure cron job for:
+monitormail.sh will check your servers mail every X minutes (defined by your cron job)
+script_flag.sh will reset to not flagged (0) every IP listed in servers.txt</p>
+
+<p>Example:
+Check every 5 minutes servers' mail queue and flush notify flag every 45 mins. If a server has lots of spam, only one email notification will be sent every 45 minutes.</p>
+
+<p>*/5 * * * * root /root/monitor/monitormail.sh
+*/45 * * * * root /root/monitor/script_flag.sh</p>
+
+<p>==ADDING another IP ==</p>
+
+<p>1) Enter the key "IP:0" in /root/monitor/servers.txt at the very end, one per line. ie -&gt; "127.0.0.1:0"</p>
+
+<p>2) Insert the RSA key on the target server to which the monitor connects directly via ssh. To do this copy the contents of id_rsa.pub where monitormail.sh is installed and add it at the end of the file /root/.ssh/authorized_keys on the remote mailserver we want to monitor. Create .ssh directory and authorized_keys file if does not exist. Google it about creating the id_rsa.pub file on your server.</p>
+
+<p>CAUTION! There can be no spaces or gaps by copying and pasting the content, otherwise it will not allow direct ssh access to the server.</p>
+
+<p>3) If you are using Plesk Control Panel, check out the version. Plesk 8.2 and below must be added as exception in the next step because the binary mailqueuemng does not work.</p>
+
+<p>3.1) If you have plesk 8.0 or 8.2, you must uncomment LINE 35 and add the IP. You must also install qmHandle in the monitor server.</p>
+
+<p>Uncomment LINE 35 -&gt; # if [ "$line" = "YOUR_IP" ]  , if you need to add more than one IP, add OR operator and the bash code in brackets:
+ Here's an example:</p>
+
+<p>[ "$ Line" = "127.0.0.1" ]; then</p>
+
+<p>After adding a new IP would remain:</p>
+
+<p>[ "$ Line" = "127.0.0.1" ] | | [ "$ line" = "NEWIP" ]; then</p>
+
+<p>Easy, right!?</p>
+
+<p>CAUTION! there must be a space after the end bracket.</p>
+
+<p>4) Finally connect via the ssh directly with the target server. ie -&gt; ssh root@NEWIP and accept the fingerprint "yes".</p>
+
+<p>We are done!</p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Qmailcheck maintained by <a href="https://github.com/danielconde">danielconde</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
