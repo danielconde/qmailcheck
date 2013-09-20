@@ -47,11 +47,11 @@ CAUTION! There can be no spaces or gaps by copying and pasting the content, othe
 
 As the binary mailqueuemng does not work on plesk 8.2 and below, we must introduce this exception in LINE 35 -> "OR" + line = IP. Here's an example:
 
-.... | | ["$ Line" = "127.0.0.1" ], then
+.... | | [ "$ Line" = "127.0.0.1" ], then
 
 After adding a new IP would remain:
 
-| | ["$ Line" = "127.0.0.1"] | | ["$ line" = "NEWIP" ], then
+| | [ "$ Line" = "127.0.0.1" ] | | [ "$ line" = "NEWIP" ], then
 
 Easy, right!?
 
