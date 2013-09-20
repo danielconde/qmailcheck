@@ -43,15 +43,16 @@ CAUTION! There can be no spaces or gaps by copying and pasting the content, othe
 
 2 - If you are using Plesk Control Panel, check out the version. Plesk 8.2 and below must be added as exception in the next step because the binary mailqueuemng does not work.
 
-2.1 -> If you have plesk 8.0 or 8.2, you must enter the IP in monitormail.sh and install qmHandle
+2.1 -> If you have plesk 8.0 or 8.2, you must uncomment LINE 35 and add the IP. You must also install qmHandle in the monitor server.
 
-We must introduce this exception in LINE 35 -> "OR" + line = IP. Here's an example:
+Uncomment LINE 35 -> # if [ "$line" = "YOUR_IP" ]  , if you need to add more than one IP, add OR operator and the bash code in brackets:
+ Here's an example:
 
-.... | | [ "$ Line" = "127.0.0.1" ], then
+ [ "$ Line" = "127.0.0.1" ]; then
 
 After adding a new IP would remain:
 
-| | [ "$ Line" = "127.0.0.1" ] | | [ "$ line" = "NEWIP" ], then
+[ "$ Line" = "127.0.0.1" ] | | [ "$ line" = "NEWIP" ]; then
 
 Easy, right!?
 
