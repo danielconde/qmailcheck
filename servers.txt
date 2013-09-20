@@ -1,0 +1,4 @@
+# Add here you mail server IP. One per line. You must enter IP:0 format.
+# 0 means not flagged. 1 means flagged (notified by email)
+127.0.0.1:0
+10.0.0.1:0
