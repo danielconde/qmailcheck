@@ -1,6 +1,6 @@
 qmailcheck by Daniel Conde Rodriguez
-Twitter: @daconde2
-es.linkedin.com/in/daniconde
+# Twitter: @daconde2
+# es.linkedin.com/in/daniconde
 ==========
 
 Qmail and Postfix Mail Queue Monitor Script
